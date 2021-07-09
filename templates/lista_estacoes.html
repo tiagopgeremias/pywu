@@ -1,0 +1,66 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "css/custom.css" %}" />{% endblock %}
+{% load i18n %}
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></div>{% endblock %}
+{% block content %}
+<div style="width: 100%;">
+    {% if page_obj.object_list %}
+    <table style="width: 100%;" id="result_list">
+        <thead>
+            <tr>
+                <th>
+                    <div class="text">Hostname</div>
+                </th>
+                <th>
+                    <div class="text">Tipo estação</div>
+                </th>
+                <th>
+                    <div class="text">Tipo PDV</div>
+                </th>
+                <th>
+                    <div class="text">Filial</div>
+                </th>
+                <th>
+                    <div class="text">Endereço IP</div>
+                </th>
+            </tr>
+        </thead>
+        {% for estacao in page_obj.object_list %}
+        <tr>
+            <td>{{estacao.hostname}}</td>
+            <td>{{estacao.tipo_estacao}}</td>
+            {% if estacao.tipo_pdv is not none %}
+            <td>{{ estacao.tipo_pdv }}</td>
+            {% else %}
+            <td>-</td>
+            {% endif %}
+            <td>{{estacao.filial}}</td>
+            <td>{{estacao.endereco_ip}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class="btn-extreme-pagination btn-first" href="?page=1">&laquo;</a>
+                <a class="btn-pagination" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+        </span>
+        <span class="current-pagination">{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+        <span class="step-links">
+            {% if page_obj.has_next %}
+                <a class="btn-pagination" href="?page={{ page_obj.next_page_number }}">Proximo</a>
+                <a class="btn-extreme-pagination btn-last" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+
+    {% else %}
+        <p>Estações nao localizadas</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+[all:vars]
+ansible_user=ansible
+
+[{{inventario}}:children]
+{% for filial in filiais %}filial-{{ filial.filial }}
+{% endfor %}
+
+{% for filial in filiais %}
+[filial-{{ filial.filial }}]
+{% for estacao in estacoes %}{% if estacao.filial == filial.filial %}{{estacao.endereco_ip}} servidor=phw{{estacao.filial}}001 oraclesid=phw{{estacao.filial}} tipo_estacao={{estacao.tipo_estacao}} {% if estacao.tipo_pdv != none %}tipo_pdv={{estacao.tipo_pdv}}{% endif %} hostname={{estacao.hostname}}
+{% endif %}{% endfor %}{% endfor %}
