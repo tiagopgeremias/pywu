@@ -1,0 +1,35 @@
+.pagination{
+    margin-top: 15px;
+    line-height: 40px;
+    font-weight: bold;
+}
+.btn-pagination{
+    background-color: var(--selected-bg);
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--hairline-color);
+    border-top: 1px solid var(--hairline-color);
+}
+
+.current-pagination{
+    background-color: var(--darkened-bg);
+    padding: 10px 15px;
+    margin: 0px -4px;
+    border-bottom: 1px solid var(--hairline-color);
+    border-top: 1px solid var(--hairline-color);
+    color: var(--secondary);
+}
+
+.btn-extreme-pagination{
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--hairline-color);
+    border-top: 1px solid var(--hairline-color);
+}
+.btn-first{
+    border-left: 1px solid var(--hairline-color);
+    margin-right: -4px;
+}
+.btn-last{
+    border-right: 1px solid var(--hairline-color);
+    margin-left: -4px;
+}
